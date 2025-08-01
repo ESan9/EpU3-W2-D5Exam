@@ -1,60 +1,22 @@
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import WeatherPage from "./components/WeatherPage";
+import NavbarMeteo from "./components/NavbarMeteo";
+import FooterMeteo from "./components/FooterMeteo";
+import WeatherDetail from "./components/WeatherDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NetflixNavbar from "./components/NetflixNavbar";
-import NetflixFooter from "./components/NetflixFooter";
-import Welcome from "./components/Welcome";
-import FilmGallery from "./components/FilmGallery";
-import TVShows from "./components/TVShows";
-import MovieDetails from "./components/MovieDetails";
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
+      <NavbarMeteo />
       <Routes>
-        {/* Home Page */}
-        <Route
-          path="/"
-          element={
-            <>
-              <NetflixNavbar />
-              <main className="d-flex flex-column">
-                <Welcome />
-                <FilmGallery search="Neon Genesis Evangelion" />
-                <FilmGallery search="Lord of The Rings" />
-                <FilmGallery search="Cowboy Bebop" />
-              </main>
-              <NetflixFooter />
-            </>
-          }
-        />
-
-        {/* TV Shows Page */}
-        <Route
-          path="/tvshows"
-          element={
-            <>
-              <NetflixNavbar />
-              <TVShows />
-              <NetflixFooter />
-            </>
-          }
-        />
-
-        {/* Movie Details Page (parametrica) */}
-        <Route
-          path="/movie-details/:movieId"
-          element={
-            <>
-              <NetflixNavbar />
-              <MovieDetails />
-              <NetflixFooter />
-            </>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/weather/:city" element={<WeatherPage />} />
+        <Route path="/dettagli/:cityName" element={<WeatherDetail />} />
+        <Route path="/preferiti/:cityName" element={<WeatherDetail />} />
       </Routes>
-    </BrowserRouter>
+      <FooterMeteo />
+    </Router>
   );
 }
-
-export default App;
