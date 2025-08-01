@@ -10,11 +10,12 @@ export default function App() {
   return (
     <Router>
       <NavbarMeteo />
+      {/* Implemento il Route anche se non l'ho capito benissimo, però funziona */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/weather/:city" element={<WeatherPage />} />
-        <Route path="/dettagli/:cityName" element={<WeatherDetail />} />
-        <Route path="/preferiti/:cityName" element={<WeatherDetail />} />
+        <Route path="/dettagli/:city" element={<WeatherDetail />} />
+        <Route path="/preferiti/:city" element={<WeatherDetail />} />
       </Routes>
       <FooterMeteo />
     </Router>

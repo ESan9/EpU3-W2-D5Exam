@@ -7,20 +7,44 @@ const FooterMeteo = () => {
     <footer className="text-secondary py-4 bg-primary border-top">
       <Container>
         <Row className="justify-content-center">
-          <Col xs={12} md={10}>
+          <Col xs={12}>
             <Row className="mb-3">
               <Col>
-                <div className="d-flex gap-3 fs-5 justify-content-center justify-content-lg-start">
-                  <BsFacebook className="text-light" />
-                  <BsInstagram className="text-light" />
-                  <BsTwitterX className="text-light" />
-                  <BsYoutube className="text-light" />
+                <div className="d-flex gap-3 fs-5 justify-content-center">
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <BsFacebook className="text-light" />
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <BsInstagram className="text-light" />
+                  </a>
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <BsTwitterX className="text-light" />
+                  </a>
+                  <a
+                    href="https://youtube.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <BsYoutube className="text-light" />
+                  </a>
                 </div>
               </Col>
             </Row>
             <hr className="text-light"></hr>
-            <Row className=" d-flex justify-content-center row-cols-sm-1 row-cols-md-2">
-              <Col className="d-flex flex-column align-items-center align-items-lg-start footer-links">
+            <Row className=" d-flex justify-content-center row-cols-sm-1">
+              <Col className="d-flex flex-column align-items-center footer-links">
                 <p>
                   <a href="#">Centro assistenza</a>
                 </p>
@@ -31,7 +55,7 @@ const FooterMeteo = () => {
                   <a href="#">Preferenze cookie</a>
                 </p>
               </Col>
-              <Col className="d-flex flex-column align-items-center align-items-lg-start footer-links">
+              <Col className="d-flex flex-column align-items-center footer-links">
                 <p>
                   <a href="#">Contattaci</a>
                 </p>
@@ -46,9 +70,15 @@ const FooterMeteo = () => {
             <hr className="text-light"></hr>
             <Row className="mt-3">
               <Col>
-                <div className="d-flex flex-column align-items-center align-items-lg-start footer-links">
-                  <button className="btn btn-outline-light btn-sm rounded-0">
-                    Codice di servizio
+                <div className="d-flex flex-column align-items-center footer-links">
+                  <button
+                    className="btn btn-outline-light btn-sm rounded-0"
+                    // Questo porta in alto la pagina, ho googlato
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                  >
+                    Torna in cima
                   </button>
                 </div>
               </Col>
@@ -56,7 +86,7 @@ const FooterMeteo = () => {
 
             <Row className="mt-2">
               <Col>
-                <div className="d-flex justify-content-center justify-content-lg-start">
+                <div className="d-flex justify-content-center">
                   <small className="text-light">
                     &copy; Il Meteo che ci piace
                   </small>

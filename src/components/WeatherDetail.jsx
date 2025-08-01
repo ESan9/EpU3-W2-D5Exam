@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import { BsCloudRain, BsSun, BsClouds, BsCloud } from "react-icons/bs";
 
 const API_KEY = "2c32ac7e6b365af5bae9fbb5fc2d6712";
@@ -15,7 +15,7 @@ const getWeatherIcon = (description) => {
 };
 
 const WeatherDetail = () => {
-  const { cityName } = useParams();
+  const { city } = useParams();
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [error, setError] = useState(null);
@@ -24,13 +24,13 @@ const WeatherDetail = () => {
     async function fetchData() {
       try {
         const weatherRes = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${API_KEY}&lang=it`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}&lang=it`
         );
         if (!weatherRes.ok) throw new Error("Errore nel meteo attuale");
         const weatherData = await weatherRes.json();
 
         const forecastRes = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${API_KEY}&lang=it`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}&lang=it`
         );
         if (!forecastRes.ok) throw new Error("Errore nelle previsioni");
         const forecastData = await forecastRes.json();
@@ -47,7 +47,7 @@ const WeatherDetail = () => {
     }
 
     fetchData();
-  }, [cityName]);
+  }, [city]);
 
   // La gestione dell'errore funziona, ho provato a cambiare la key
 
@@ -59,28 +59,34 @@ const WeatherDetail = () => {
     );
   }
 
+  // Sto cercando un modo per fare in modo di mettere le card divise per giorno, probabilmente con filter,
+  // però non mi viene in mente nulla di semplice e non ho tanto tempo
+
   if (!weather) return <div className="p-4">Caricamento...</div>;
 
   return (
-    <div className="p-4 container">
-      <Card className="mb-4">
-        <Card.Body>
+    <Container className="my-4">
+      <Card style={{ border: "none" }}>
+        <Card.Body className="border-0">
           <Card.Title>Meteo attuale a {weather.name}</Card.Title>
-          <Card.Text>
+          <Card.Text className="text-capitalize">
             {getWeatherIcon(weather.weather[0].description)}
             {weather.weather[0].description}
           </Card.Text>
-          <Card.Text>Temperatura: {weather.main.temp}°C</Card.Text>
-          <Card.Text>Umidità: {weather.main.humidity}%</Card.Text>
+          <Card.Text>🌡️ Temperatura: {weather.main.temp}°C</Card.Text>
+          <Card.Text>💧 Umidità: {weather.main.humidity}%</Card.Text>
         </Card.Body>
       </Card>
 
-      <div className="row">
+      <Row>
         {forecast.map((item) => (
-          <div className="col-md-2 mb-3" key={item.dt}>
+          <Col className="col-md-2 mb-3" key={item.dt}>
             <Card>
               <Card.Body>
-                <Card.Title style={{ fontSize: "1rem" }}>
+                <Card.Title
+                  className="text-capitalize"
+                  style={{ fontSize: "1rem" }}
+                >
                   {new Date(item.dt_txt).toLocaleDateString("it-IT", {
                     weekday: "long",
                   })}{" "}
@@ -90,17 +96,17 @@ const WeatherDetail = () => {
                     minute: "2-digit",
                   })}
                 </Card.Title>
-                <Card.Text>
+                <Card.Text className="text-capitalize">
                   {getWeatherIcon(item.weather[0].description)}
                   {item.weather[0].description}
                 </Card.Text>
                 <Card.Text>{item.main.temp}°C</Card.Text>
               </Card.Body>
             </Card>
-          </div>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 
