@@ -65,10 +65,10 @@ const WeatherDetail = () => {
   if (!weather) return <div className="p-4">Caricamento...</div>;
 
   return (
-    <Container className="my-4">
+    <Container className="my-4 text-center text-lg-start">
+      <h2>Meteo Attuale a {weather.name}</h2>
       <Card style={{ border: "none" }}>
         <Card.Body className="border-0">
-          <Card.Title>Meteo attuale a {weather.name}</Card.Title>
           <Card.Text className="text-capitalize">
             {getWeatherIcon(weather.weather[0].description)}
             {weather.weather[0].description}
@@ -79,6 +79,9 @@ const WeatherDetail = () => {
       </Card>
 
       <Row>
+        <h3 className="my-4 text-center text-lg-start">
+          Previsioni ogni tre ore
+        </h3>
         {forecast.map((item) => (
           <Col className="col-md-2 mb-3" key={item.dt}>
             <Card>
