@@ -49,7 +49,7 @@ const NavbarMeteo = () => {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/preferiti/Oristano"
+                to="/preferiti/Oristano" //Quando avrò più tempo lo farò dinamico e nella pagina dopo la ricerca aggiungerò qualcosa per metterla tra i preferiti
                 className={`fw-bold ${
                   location.pathname.startsWith("/preferiti")
                     ? "text-light"
